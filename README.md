@@ -50,7 +50,10 @@ import createPersistedState from 'vuex-persistedstate'
 export default ({store}) => {
   createPersistedState({
       key: 'yourkey',
-      paths: [...]
+      paths: [
+        'foo',
+        'bar.baz' // Assuming you have a Vuex Module namespace as bar/baz
+      ]
       ...
   })(store)
 }
@@ -64,7 +67,7 @@ Creates a new instance of the plugin with the given options. The following optio
 can be provided to configure the plugin for your specific needs:
 
 * `key <String>`: The key to store the persisted state under. (default: **vuex**)
-* `paths <Array>`: An array of any paths to partially persist the state. If no paths are given, the complete state is persisted. (default: **[]**)
+* `paths <Array>`: An array of any paths to partially persist the state. If no paths are given, the complete state is persisted. If using namespaced Vuex modules, instead of using `/`, use dot `.` as separator. (default: **[]**)
 * `reducer <Function>`: A function that will be called to reduce the state to persist based on the given paths. Defaults to include the values.
 * `subscriber <Function>`: A function called to setup mutation subscription. Defaults to `store => handler => store.subscribe(handler)`
 
